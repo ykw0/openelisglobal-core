@@ -3,6 +3,7 @@
 			     us.mn.state.health.lims.common.formfields.FormFields,
 			     us.mn.state.health.lims.common.formfields.FormFields.Field,
 			     us.mn.state.health.lims.common.provider.validation.AccessionNumberValidatorFactory,
+			     us.mn.state.health.lims.common.provider.validation.ProgramAccessionValidator,
 			     us.mn.state.health.lims.common.provider.validation.IAccessionNumberValidator,
 			     us.mn.state.health.lims.common.util.ConfigurationProperties.Property" %>
 <%@ page import="us.mn.state.health.lims.common.util.*" %>
@@ -35,7 +36,7 @@
   	supportSubjectNumber = FormFields.getInstance().useField(Field.SubjectNumber);
   	supportNationalID = FormFields.getInstance().useField(Field.NationalID);
   	supportLabNumber = FormFields.getInstance().useField(Field.SEARCH_PATIENT_WITH_LAB_NO);
- 	accessionNumberValidator = new AccessionNumberValidatorFactory().getValidator();
+ 	accessionNumberValidator = new ProgramAccessionValidator();//new AccessionNumberValidatorFactory().getValidator();
  	String path = request.getContextPath();
  	basePath = request.getScheme() + "://" + request.getServerName() + ":"	+ request.getServerPort() + path + "/";
  %>

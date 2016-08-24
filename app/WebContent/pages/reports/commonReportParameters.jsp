@@ -2,6 +2,7 @@
 	contentType="text/html; charset=utf-8"
 	import="us.mn.state.health.lims.common.action.IActionConstants,
 	us.mn.state.health.lims.common.provider.validation.AccessionNumberValidatorFactory,
+	us.mn.state.health.lims.common.provider.validation.ProgramAccessionValidator,
 	us.mn.state.health.lims.common.provider.validation.IAccessionNumberValidator,
     us.mn.state.health.lims.common.util.DateUtil,
 	us.mn.state.health.lims.common.util.StringUtil"
@@ -20,7 +21,7 @@
  %>
 
 <%
-	accessionValidator = new AccessionNumberValidatorFactory().getValidator();
+	accessionValidator =new ProgramAccessionValidator(); //new AccessionNumberValidatorFactory().getValidator();
 	String path = request.getContextPath();
 	basePath = request.getScheme() + "://" + request.getServerName() + ":"	+ request.getServerPort() + path + "/";
 %>

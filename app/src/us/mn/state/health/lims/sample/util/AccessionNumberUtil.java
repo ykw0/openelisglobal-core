@@ -29,9 +29,7 @@ import us.mn.state.health.lims.common.services.StatusSet;
 import static us.mn.state.health.lims.common.provider.validation.IAccessionNumberValidator.ValidationResults.*;
 
 public class AccessionNumberUtil {
-
 	private static IAccessionNumberValidator accessionNumberValidator;
-
 	public static IAccessionNumberValidator getAccessionNumberValidator() {
 		if( accessionNumberValidator == null){
 			try {
