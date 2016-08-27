@@ -429,7 +429,7 @@
 				<text><![CDATA[Charge Virale:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="135" y="15" width="352" height="18"/>
+				<reportElement x="135" y="16" width="352" height="18"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="8" isItalic="true"/>
 				</textElement>

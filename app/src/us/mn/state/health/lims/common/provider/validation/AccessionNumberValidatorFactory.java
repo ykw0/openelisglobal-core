@@ -22,11 +22,14 @@ import us.mn.state.health.lims.common.util.ConfigurationProperties;
 import us.mn.state.health.lims.common.util.ConfigurationProperties.Property;
 
 public class AccessionNumberValidatorFactory {
+
 	private IAccessionNumberValidator validator; 
+
+
 	public IAccessionNumberValidator getValidator() throws LIMSInvalidConfigurationException{
-	
+
 		String accessionFormat = ConfigurationProperties.getInstance().getPropertyValueUpperCase(Property.AccessionFormat);
-		
+
 		if( accessionFormat.equals("SITEYEARNUM")){
 			return getSiteYearValidator();
 		}else if( accessionFormat.equals("PROGRAMNUM")){
@@ -77,6 +80,6 @@ public class AccessionNumberValidatorFactory {
 
 		return validator;
 	}
-	
+
 
 }
