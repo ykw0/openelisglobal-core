@@ -56,7 +56,9 @@
     </definition>
     
     <definition name="sampleEntryVLFormDefintion" path="/pages/sample/CI/sampleAddVLProject.jsp">
-    	<put name="vlStudy" value="/pages/patient/CI/vlStudy.jsp" />
+    	<put name="sampleOrder" value="/pages/patient/CI/vlStudy.jsp" />
+		<put name="addSample" value="/pages/sample/sampleAdd.jsp"/>
+
     </definition>
 
    <definition name="sampleEditDefinition" extends="baseDefinition">
