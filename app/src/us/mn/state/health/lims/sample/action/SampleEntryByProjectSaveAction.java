@@ -110,34 +110,4 @@ public class SampleEntryByProjectSaveAction extends BaseSampleEntryAction {
 	protected String getPageSubtitleKey() {
 		return "sample.entry.title";
 	}
-	
-	protected void loadSamplesTestsCollection(BaseActionForm dynaForm){
-	if(FormFields.getInstance().useField(Field.InitialSampleCondition)) return;
-		
-		//DynaActionForm dynaForm = (DynaActionForm) form;
-	String xml=(String)dynaForm.get( "sampleXML" );
-	System.out.println("AMANI:"+xml);
-	ObservationData observations=(ObservationData)dynaForm.get( "observations" );
-	try {
-		Document sampleDom = DocumentHelper.parseText(xml);
-
-		for (Iterator i = sampleDom.getRootElement().elementIterator("sample"); i.hasNext();) {
-		//	sampleItemIdIndex++;
-
-			Element sampleItem = (Element) i.next();
-			String initialSampleConditionIdString = sampleItem.attributeValue("initialConditionIds");
-			if (!GenericValidator.isBlankOrNull(initialSampleConditionIdString)) {
-				String[] initialSampleConditionIds = initialSampleConditionIdString.split(",");
-				for(int j=0;j<initialSampleConditionIds.length;j++)
-				observations.setInitialSampleConditionINNs(j, initialSampleConditionIds[j]);
-			}
-		}
-		
-	  } catch (DocumentException e) {
-		e.printStackTrace();
-	  }
-	//  dynaForm.set("orbservations", observations);
-	
-		
-	}
 }

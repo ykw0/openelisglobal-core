@@ -190,7 +190,7 @@ function  /*void*/ savePage__(action) {
 	window.onbeforeunload = null; // Added to flag that formWarning alert isn't needed.
 	var form = window.document.forms[0];
 	if (action == null) {
-		loadSamples();
+	//	loadSamples();
 		action = "SampleEntryVLSave.do?type=" + type
 	}
 	form.action = action;
@@ -272,7 +272,7 @@ function clearFormElements(fieldIds) {
 <hr/>
 
 <div id="VL_Id" style="display:none;">
-	<tiles:insert attribute="sampleOrder"/>
+	<tiles:insert attribute="vlStudy"/>
 <table width="100%">
 	<tr>
 		<td ></td>
@@ -317,18 +317,7 @@ function clearFormElements(fieldIds) {
 				   onchange="vl.checkSampleItem($('vl.edtaTubeTaken'), this);" />
 		</td>
 	</tr>
-	<tr>
-		<td></td>
-		<td colspan="3" class="sectionTitle">
-			<bean:message  key="sample.entry.sample.condition" />
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>
-			<tiles:insert attribute="addSample"/>
-		</td>
-	</tr>
+	
 </table>	
 </div>
 

@@ -330,7 +330,6 @@ public abstract class Accessioner {
 	
 		//	persistObservationHistoryLists();// no more running name has been changed to persistObservationHistoryLists2
 			persistObservationHistoryLists2();
-			persistInitialSampleConditions();
 			persistRecordStatus();
 			deleteOldPatient();
 			populateAndPersistUnderInvestigationNote();
