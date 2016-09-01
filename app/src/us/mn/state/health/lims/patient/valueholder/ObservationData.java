@@ -446,10 +446,10 @@ public class ObservationData implements Serializable {
 	}
 
     public void setInitialSampleConditionINNs(int index, String value) {
-        currentARVTreatmentINNs.set(index, value);
+    	initialSampleConditionINNs.set(index, value);
     }
 
-    public List<String> getInitialSampleConditionINNs() {
+    public List<String> getInitialSampleConditionINNsList() {
 		return initialSampleConditionINNs;
 	}
     
