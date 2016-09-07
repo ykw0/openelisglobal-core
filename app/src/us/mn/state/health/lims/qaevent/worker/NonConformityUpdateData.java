@@ -87,6 +87,9 @@ public class NonConformityUpdateData {
 		qaEvents = (List<QaEventItem>) dynaForm.get("qaEvents");
 		newNoteText = (Boolean)dynaForm.get("commentNew");
 		noteText = dynaForm.getString( "comment");
+		for (QaEventItem item : qaEvents) {
+		System.out.println("SampleType:"+item.getSampleType()+":::Section="+item.getSection());
+		}
 	}
 
 	public Boolean getNewNationalId(){

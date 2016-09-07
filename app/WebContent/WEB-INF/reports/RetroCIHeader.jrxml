@@ -21,7 +21,9 @@
 	<parameter name="duplicateReport" class="java.lang.Boolean" isForPrompting="false">
 		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
 	</parameter>
-	<parameter name="leftHeaderImage1" class="java.lang.String"/>
+	<parameter name="rightHeaderImage" class="java.io.InputStream"/>
+	<parameter name="leftHeaderImage2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="rightHeaderImage2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -47,7 +49,7 @@
 				<text><![CDATA[LABORATOIRE CDC/RETRO-CI]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="73" width="108" height="20">
+				<reportElement x="2" y="59" width="63" height="20">
 					<printWhenExpression><![CDATA[$P{duplicateReport}]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -56,24 +58,24 @@
 				<text><![CDATA[Duplicata]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="440" y="21" width="109" height="18" backcolor="#FFFFFF">
+				<reportElement mode="Transparent" x="440" y="67" width="109" height="18" backcolor="#FFFFFF">
 					<printWhenExpression><![CDATA[$P{status} != null]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Résults " + $P{status}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="76" width="549" height="20"/>
+				<reportElement x="1" y="76" width="548" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Chef du laboratorie: Dr ADJE-TOURE Christiane]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="365" y="0" width="184" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<reportElement key="textField-2" x="440" y="45" width="109" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{studyName}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -91,12 +93,36 @@
 				<text><![CDATA[TEL: 21 21 42 50/ 21 25 41 89   FAX: 21 24 29 69]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="98" width="105" height="14"/>
+				<reportElement x="0" y="98" width="80" height="34"/>
 				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Dr TEHE G. André
-]]></text>
+Diagnostic clinique]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="98" width="116" height="34"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Dr KOHEMUN-E. Natacha
+Sérologie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="98" width="110" height="34"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[M. Ya Kouadio L.
+Diagnostic moléculaire]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="98" width="107" height="34"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Dr TOURE-A. Ramatou
+Assurance qualité]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="109" y="0" width="331" height="20"/>
@@ -105,59 +131,22 @@
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<image isUsingCache="true">
+			<image isUsingCache="true" onErrorType="Blank">
 				<reportElement mode="Transparent" x="1" y="0" width="64" height="57" backcolor="#FFFFFF"/>
 				<imageExpression class="java.io.InputStream"><![CDATA[$P{leftHeaderImage}]]></imageExpression>
 			</image>
-			<staticText>
-				<reportElement x="4" y="116" width="88" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Diagnostic Clinique]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="155" y="98" width="129" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Dr. KOHEMUN-E. Natacha]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="155" y="116" width="88" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Sérologie]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="303" y="98" width="105" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ M. Ya Kouadio L.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="303" y="116" width="105" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Diagnostic moléculaire]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="441" y="98" width="105" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Dr TOURE-A. Ramatou]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="441" y="116" width="88" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Assurance qualité]]></text>
-			</staticText>
+			<image isUsingCache="true" onErrorType="Blank">
+				<reportElement mode="Transparent" x="484" y="0" width="64" height="57" backcolor="#FFFFFF"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{rightHeaderImage}]]></imageExpression>
+			</image>
+			<image isUsingCache="true" onErrorType="Blank">
+				<reportElement mode="Transparent" x="1" y="0" width="64" height="57" backcolor="#FFFFFF"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{leftHeaderImage2}]]></imageExpression>
+			</image>
+			<image isUsingCache="true" onErrorType="Blank">
+				<reportElement mode="Transparent" x="484" y="0" width="64" height="57" backcolor="#FFFFFF"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{rightHeaderImage2}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 	<columnFooter>

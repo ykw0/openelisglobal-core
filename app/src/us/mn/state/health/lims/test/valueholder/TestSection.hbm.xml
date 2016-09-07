@@ -35,6 +35,8 @@
         </many-to-one>
 
 		<property name="sortOrderInt" column="sort_order" type="integer" />
+		
+		<property name="nameKey" type="java.lang.String" column="display_key"/>
     </class>
     <query name="testsection.getNext">
          from TestSection ts order by ts.organization.organizationName, ts.testSectionName

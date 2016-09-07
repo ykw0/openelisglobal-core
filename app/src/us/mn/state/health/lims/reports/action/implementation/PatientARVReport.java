@@ -74,6 +74,8 @@ public abstract class PatientARVReport extends RetroCIPatientReport{
 
 		data.setDoctor(getObservationValues(OBSERVATION_DOCTOR_ID));
 		data.setLabNo(reportSample.getAccessionNumber());
+		
+		data.getSampleQaEventItems(reportSample);
 
 	}
 

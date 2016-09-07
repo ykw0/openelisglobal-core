@@ -6,8 +6,8 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="229"/>
 	<import value="net.sf.jasperreports.engine.*"/>
-	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
+	<import value="java.util.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["../reports/"]]></defaultValueExpression>
 	</parameter>
@@ -541,7 +541,7 @@ Hct 40.1-51.0%   /   34.1-44.9%]]></text>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[N : 1.78-5.38 10^3µl  /1.56-6.13 10^3µl
+				<text><![CDATA[N : 1.78-5.38 10^3µl  /1.56-6.13 10^3µl 
 L : 1.32-3.57 10^3µl/1.18-3.7410^3µl
 M : 0.30-0.82 10^3µl /0.24-0.36 10^3µl
 Eo : 0.04-0.5410^3µl /0.04-0.36 10^3µl
@@ -583,7 +583,7 @@ Glycémie : 0.70-1.10 g/l (H) / 0.75-1.10 g/l (F)]]></text>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Phénotypage Lymphocytaire:
-CD4% :33-58%
+CD4% :33-58%  
 CD4# : 404-1612 cellules/µl]]></text>
 			</staticText>
 			<line>

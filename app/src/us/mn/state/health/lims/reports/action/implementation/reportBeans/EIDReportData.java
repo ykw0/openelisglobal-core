@@ -16,6 +16,17 @@
  */
 package us.mn.state.health.lims.reports.action.implementation.reportBeans;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import us.mn.state.health.lims.common.services.QAService;
+import us.mn.state.health.lims.common.services.QAService.QAObservationType;
+import us.mn.state.health.lims.qaevent.valueholder.retroCI.QaEventItem;
+import us.mn.state.health.lims.sample.valueholder.Sample;
+import us.mn.state.health.lims.sampleqaevent.dao.SampleQaEventDAO;
+import us.mn.state.health.lims.sampleqaevent.daoimpl.SampleQaEventDAOImpl;
+import us.mn.state.health.lims.sampleqaevent.valueholder.SampleQaEvent;
+
 public class EIDReportData {
 
 	private String hiv_status = "X";
@@ -37,6 +48,12 @@ public class EIDReportData {
 	private String clinicDistrict;
 	private String clinic;
 	private String status;
+	private Boolean duplicateReport = Boolean.FALSE;
+	
+	private List<SampleQaEvent> sampleQAEventList;
+	List<QaEventItem> qaEventItems;
+	
+	private String eidQaEvent=null;
 
 	public String getHiv_status() {
 		return hiv_status;
@@ -153,6 +170,41 @@ public class EIDReportData {
 	}
 	public void setReceptiondate(String receptiondate){
 		this.receptiondate = receptiondate;
+	}
+	public Boolean getDuplicateReport() {
+		return duplicateReport;
+	}
+	public void setDuplicateReport(Boolean duplicateReport) {
+		this.duplicateReport = duplicateReport;
+	}
+	public String getEidQaEvent() {
+		return eidQaEvent;
+	}
+	public void setEidQaEvent(String eidQaEvent) {
+		this.eidQaEvent = eidQaEvent;
+	}
+	/**
+	 * @param sample
+	 * @return
+	 */
+	public void getSampleQaEventItems(Sample sample){
+	    qaEventItems = new ArrayList<QaEventItem>();
+		if(sample != null){
+			getSampleQaEvents(sample);
+			for(SampleQaEvent event : sampleQAEventList){
+				QAService qa = new QAService(event);
+					
+				if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.PCR"))
+					eidQaEvent=eidQaEvent==null ? qa.getQAEvent().getLocalizedName() : eidQaEvent+" , "+qa.getQAEvent().getLocalizedName();
+	
+				
+			}
+		}
+		
+	}
+	public void getSampleQaEvents(Sample sample){
+		SampleQaEventDAO sampleQaEventDAO = new SampleQaEventDAOImpl();
+		sampleQAEventList = sampleQaEventDAO.getSampleQaEventsBySample(sample);
 	}
 
 

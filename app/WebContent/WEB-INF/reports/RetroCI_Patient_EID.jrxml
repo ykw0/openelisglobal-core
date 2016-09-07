@@ -4,16 +4,19 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="261"/>
 	<import value="net.sf.jasperreports.engine.*"/>
-	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
+	<import value="java.util.*"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["../reports/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="studyName" class="java.lang.String"/>
 	<parameter name="directorName" class="java.lang.String"/>
 	<parameter name="leftHeaderImage" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="rightHeaderImage" class="java.io.InputStream"/>
+	<parameter name="leftHeaderImage2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="rightHeaderImage2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -33,6 +36,8 @@
 	<field name="compleationdate" class="java.lang.String"/>
 	<field name="status" class="java.lang.String"/>
 	<field name="receptiondate" class="java.lang.String"/>
+	<field name="duplicateReport" class="java.lang.Boolean"/>
+	<field name="eidQaEvent" class="java.lang.String"/>
 	<variable name="studyName" class="java.lang.String">
 		<initialValueExpression><![CDATA["Diagnostic des enfants par DBS-PCR"]]></initialValueExpression>
 	</variable>
@@ -52,41 +57,41 @@
 				<subreportParameter name="accession_number">
 					<subreportParameterExpression><![CDATA[$F{accession_number}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="birth_date">
+					<subreportParameterExpression><![CDATA[$F{birth_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="servicename">
+					<subreportParameterExpression><![CDATA[$F{servicename}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ageMonth">
+					<subreportParameterExpression><![CDATA[$F{ageMonth}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ageWeek">
+					<subreportParameterExpression><![CDATA[$F{ageWeek}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="doctor">
+					<subreportParameterExpression><![CDATA[$F{doctor}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="subjectNumber">
 					<subreportParameterExpression><![CDATA[$F{subjectNumber}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="receptionDate">
 					<subreportParameterExpression><![CDATA[$F{receptiondate}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="birth_date">
-					<subreportParameterExpression><![CDATA[$F{birth_date}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="compleationdate">
 					<subreportParameterExpression><![CDATA[$F{compleationdate}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="servicename">
-					<subreportParameterExpression><![CDATA[$F{servicename}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="gender">
 					<subreportParameterExpression><![CDATA[$F{gender}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="ageMonth">
-					<subreportParameterExpression><![CDATA[$F{ageMonth}]]></subreportParameterExpression>
+				<subreportParameter name="collectiondate">
+					<subreportParameterExpression><![CDATA[$F{collectiondate}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="subjectno">
 					<subreportParameterExpression><![CDATA[$F{subjectno}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="collectiondate">
-					<subreportParameterExpression><![CDATA[$F{collectiondate}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="ageWeek">
-					<subreportParameterExpression><![CDATA[$F{ageWeek}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="sitesubjectno">
 					<subreportParameterExpression><![CDATA[$F{sitesubjectno}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="doctor">
-					<subreportParameterExpression><![CDATA[$F{doctor}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "RetroCI_Patient_EID_info.jasper"]]></subreportExpression>
@@ -105,11 +110,23 @@
 				<subreportParameter name="leftHeaderImage">
 					<subreportParameterExpression><![CDATA[$P{leftHeaderImage}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="leftHeaderImage2">
+					<subreportParameterExpression><![CDATA[$P{leftHeaderImage2}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="status">
 					<subreportParameterExpression><![CDATA[$F{status}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="duplicateReport">
+					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="studyName">
 					<subreportParameterExpression><![CDATA[$P{studyName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rightHeaderImage2">
+					<subreportParameterExpression><![CDATA[$P{rightHeaderImage2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rightHeaderImage">
+					<subreportParameterExpression><![CDATA[$P{rightHeaderImage}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="directorName">
 					<subreportParameterExpression><![CDATA[$P{directorName}]]></subreportParameterExpression>
@@ -132,12 +149,12 @@
 				<text><![CDATA[Résultats PCR – dépistage Précoce Enfant VIH :]]></text>
 			</staticText>
 			<textField isBlankWhenNull="false">
-				<reportElement key="textField-1" x="163" y="37" width="172" height="17"/>
+				<reportElement key="textField-1" x="163" y="59" width="172" height="17"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{hiv_status} == null ? "Négatif" : $F{hiv_status}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-3" x="1" y="37" width="144" height="17"/>
+				<reportElement key="staticText-3" x="1" y="59" width="144" height="17"/>
 				<textElement/>
 				<text><![CDATA[Résultat du diagnostic PCR :]]></text>
 			</staticText>
@@ -149,14 +166,26 @@
 				<text><![CDATA[Commentaire Laboratoire:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-5" x="1" y="56" width="144" height="17"/>
+				<reportElement key="staticText-5" x="1" y="78" width="144" height="17"/>
 				<textElement/>
 				<text><![CDATA[Rang de la PCR:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="false">
-				<reportElement key="textField-2" x="163" y="56" width="172" height="17"/>
+				<reportElement key="textField-2" x="163" y="78" width="172" height="17"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pcr_type} == null ? "Inconnu" : $F{pcr_type}.equals("First PCR") ? "1" : $F{pcr_type}.equals("Second PCR") ? "2" : $F{pcr_type}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="79" y="19" width="366" height="16"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Analyseur : COBAS AmpliPrep/COBAS TaqMan- Roche) Echantillon : DBS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-190" x="107" y="37" width="365" height="19" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{eidQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{eidQaEvent}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

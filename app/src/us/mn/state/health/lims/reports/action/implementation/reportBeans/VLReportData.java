@@ -16,6 +16,17 @@
  */
 package us.mn.state.health.lims.reports.action.implementation.reportBeans;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import us.mn.state.health.lims.common.services.QAService;
+import us.mn.state.health.lims.common.services.QAService.QAObservationType;
+import us.mn.state.health.lims.qaevent.valueholder.retroCI.QaEventItem;
+import us.mn.state.health.lims.sample.valueholder.Sample;
+import us.mn.state.health.lims.sampleqaevent.dao.SampleQaEventDAO;
+import us.mn.state.health.lims.sampleqaevent.daoimpl.SampleQaEventDAOImpl;
+import us.mn.state.health.lims.sampleqaevent.valueholder.SampleQaEvent;
+
 public class VLReportData {
 
 	private String ampli2;
@@ -38,6 +49,11 @@ public class VLReportData {
 	private String clinic;
 	private String status;
 	private Boolean duplicateReport = Boolean.FALSE;
+	
+	private List<SampleQaEvent> sampleQAEventList;
+	List<QaEventItem> qaEventItems;
+	
+	private String virologyQaEvent=null;
 
 
 	public String getSubjectno() {
@@ -160,6 +176,35 @@ public class VLReportData {
 	}
 	public void setDuplicateReport(Boolean duplicateReport) {
 		this.duplicateReport = duplicateReport;
+	}
+	public String getVirologyQaEvent() {
+		return virologyQaEvent;
+	}
+	public void setVirologyQaEvent(String virologyQaEvent) {
+		this.virologyQaEvent = virologyQaEvent;
+	}
+	/**
+	 * @param sample
+	 * @return
+	 */
+	public void getSampleQaEventItems(Sample sample){
+	    qaEventItems = new ArrayList<QaEventItem>();
+		if(sample != null){
+			getSampleQaEvents(sample);
+			for(SampleQaEvent event : sampleQAEventList){
+				QAService qa = new QAService(event);
+					
+				if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
+					virologyQaEvent=virologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
+	
+				
+			}
+		}
+		
+	}
+	public void getSampleQaEvents(Sample sample){
+		SampleQaEventDAO sampleQaEventDAO = new SampleQaEventDAOImpl();
+		sampleQAEventList = sampleQaEventDAO.getSampleQaEventsBySample(sample);
 	}
 
 
