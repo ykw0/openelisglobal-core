@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="689"/>
+	<property name="ireport.y" value="856"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -108,18 +108,18 @@
 			</line>
 			<subreport>
 				<reportElement x="0" y="0" width="552" height="134"/>
-				<subreportParameter name="leftHeaderImage">
-					<subreportParameterExpression><![CDATA[$P{leftHeaderImage}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
-				<subreportParameter name="status">
-					<subreportParameterExpression><![CDATA[$F{status}]]></subreportParameterExpression>
+				<subreportParameter name="leftHeaderImage">
+					<subreportParameterExpression><![CDATA[$P{leftHeaderImage}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
 				<subreportParameter name="duplicateReport">
 					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="status">
+					<subreportParameterExpression><![CDATA[$F{status}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="studyName">
 					<subreportParameterExpression><![CDATA[$P{studyName}]]></subreportParameterExpression>
@@ -739,11 +739,12 @@
 	</columnFooter>
 	<pageFooter>
 		<band height="143" splitType="Prevent">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="161" y="17" width="391" height="124"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="1" width="552" height="16"/>
+				<reportElement x="0" y="1" width="372" height="16"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
