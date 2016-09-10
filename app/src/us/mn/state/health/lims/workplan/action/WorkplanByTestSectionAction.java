@@ -58,7 +58,6 @@ public class WorkplanByTestSectionAction extends BaseWorkplanAction {
 
 	private final AnalysisDAO analysisDAO = new AnalysisDAOImpl();
 	private static boolean HAS_NFS_PANEL = false;
-	private List<SampleQaEvent> sampleQAEventList;
 
 
 	static {
@@ -184,7 +183,7 @@ public class WorkplanByTestSectionAction extends BaseWorkplanAction {
 				testResultItem.setNonconforming(QAService.isAnalysisParentNonConforming(analysis));
 				
 				if(FormFields.getInstance().useField(Field.QaEventsBySection))
-					testResultItem.setNonconforming(getQaEventByTestSection(sample,testSectionId));
+					testResultItem.setNonconforming(getQaEventByTestSection(sample,analysis.getTestSection()));
 				
 				testResultItem.setPatientInfo(subjectNumber);
 				testResultItem.setNextVisitDate( nextVisit );
@@ -260,14 +259,10 @@ public class WorkplanByTestSectionAction extends BaseWorkplanAction {
     private boolean isPatientNameAdded() {
         return ConfigurationProperties.getInstance().isPropertyValueEqual(Property.configurationName, "Haiti LNSP");
     }
-    private boolean getQaEventByTestSection(Sample sample,String testSectionId){
-    	TestSectionDAO testSectionDAO = new TestSectionDAOImpl();
-		TestSection ts = null;
+    private boolean getQaEventByTestSection(Sample sample,TestSection ts){
 		
-		if (!GenericValidator.isBlankOrNull(testSectionId) && sample!=null) {
-			ts = testSectionDAO.getTestSectionById(testSectionId);
-			getSampleQaEvents(sample);
-			for(SampleQaEvent event : sampleQAEventList){
+		if (ts!=null && sample!=null) {
+			for(SampleQaEvent event : getSampleQaEvents(sample)){
 				QAService qa = new QAService(event);
 				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals(ts.getNameKey()))
 					 return true;				
@@ -276,9 +271,9 @@ public class WorkplanByTestSectionAction extends BaseWorkplanAction {
     	return false;
     }
 
-	public void getSampleQaEvents(Sample sample){
+    public List<SampleQaEvent> getSampleQaEvents(Sample sample){
 		SampleQaEventDAO sampleQaEventDAO = new SampleQaEventDAOImpl();
-		sampleQAEventList = sampleQaEventDAO.getSampleQaEventsBySample(sample);
+		return sampleQaEventDAO.getSampleQaEventsBySample(sample);
 	}
 
     

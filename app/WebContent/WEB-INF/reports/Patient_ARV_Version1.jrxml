@@ -108,18 +108,18 @@
 			</line>
 			<subreport>
 				<reportElement x="0" y="0" width="552" height="134"/>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="leftHeaderImage">
 					<subreportParameterExpression><![CDATA[$P{leftHeaderImage}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
-				<subreportParameter name="duplicateReport">
-					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
 				<subreportParameter name="status">
 					<subreportParameterExpression><![CDATA[$F{status}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="duplicateReport">
+					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="studyName">
 					<subreportParameterExpression><![CDATA[$P{studyName}]]></subreportParameterExpression>
@@ -509,12 +509,12 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="171" y="208" width="186" height="19"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[Tube EDTA/Sang total/Plasma]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="359" y="208" width="191" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[Tube Sec/ Sérum ]]></text>
 			</staticText>
 			<staticText>
@@ -568,6 +568,170 @@
 			<line>
 				<reportElement x="171" y="227" width="100" height="1"/>
 			</line>
+			<line>
+				<reportElement x="171" y="228" width="1" height="132"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="228" width="165" height="16"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Echantillon Coagulé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="247" width="165" height="20"/>
+				<textElement/>
+				<text><![CDATA[Echantillon Insuffisant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="266" width="165" height="20"/>
+				<textElement/>
+				<text><![CDATA[Echantillon Hémolysé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="286" width="164" height="20"/>
+				<textElement/>
+				<text><![CDATA[Echantillon lactescent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="304" width="164" height="20"/>
+				<textElement/>
+				<text><![CDATA[Echantillon opalescent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="323" width="164" height="20"/>
+				<textElement/>
+				<text><![CDATA[Echantillon mal ou non étiqueté]]></text>
+			</staticText>
+			<line>
+				<reportElement x="359" y="228" width="1" height="132"/>
+			</line>
+			<staticText>
+				<reportElement x="173" y="228" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.coagulated"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.coagulated"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.coagulated"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="228" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.coagulated"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.coagulated"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="247" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.insufficient"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.insufficient"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.insufficient"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="247" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.insufficient"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.insufficient"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="266" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.hemolytic"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.hemolytic"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.hemolytic"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="266" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.hemolytic"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.hemolytic"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="285" width="183" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="285" width="183" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="304" width="183" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="304" width="183" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="323" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.mislabled"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.mislabled"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.mislabled"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="323" width="183" height="20">
+					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.mislabled"))||
+($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.mislabled"))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="342" width="183" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="342" width="183" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>

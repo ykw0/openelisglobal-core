@@ -348,7 +348,13 @@ public class ARVReportData {
 			getSampleQaEvents(sample);
 			for(SampleQaEvent event : sampleQAEventList){
 				QAService qa = new QAService(event);
-				allQaEvents=allQaEvents==null?qa.getQAEvent().getLocalizedName():allQaEvents+";"+qa.getQAEvent().getLocalizedName();
+				QaEventItem item = new QaEventItem();
+				item.setId(qa.getEventId());
+				item.setQaEvent(qa.getQAEvent().getId());
+				SampleItem sampleItem = qa.getSampleItem();
+                // -1 is the index for "all samples"
+				String sampleType=(sampleItem == null) ? "-1" : sampleItem.getTypeOfSample().getNameKey();
+				allQaEvents=allQaEvents==null?sampleType+":"+qa.getQAEvent().getNameKey():allQaEvents+";"+sampleType+":"+qa.getQAEvent().getNameKey();
 				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Biochemistry"))
 					biochemistryQaEvent=biochemistryQaEvent==null ? qa.getQAEvent().getLocalizedName() : biochemistryQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 				
