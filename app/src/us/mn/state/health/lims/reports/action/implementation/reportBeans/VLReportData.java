@@ -19,6 +19,8 @@ package us.mn.state.health.lims.reports.action.implementation.reportBeans;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.validator.GenericValidator;
+
 import us.mn.state.health.lims.common.services.QAService;
 import us.mn.state.health.lims.common.services.QAService.QAObservationType;
 import us.mn.state.health.lims.qaevent.valueholder.retroCI.QaEventItem;
@@ -194,7 +196,7 @@ public class VLReportData {
 			for(SampleQaEvent event : sampleQAEventList){
 				QAService qa = new QAService(event);
 					
-				if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
+				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
 					virologyQaEvent=virologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 	
 				

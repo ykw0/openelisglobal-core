@@ -67,9 +67,6 @@ var confirmNewTypeMessage = "<bean:message key='nonConformant.confirm.newType.me
 				}  
 			});
 }); */
-function showSection(sect){
-	alert(sect.value);
-}
 function siteListChanged(textValue){
 	var siteList = $("site");
 	//if the index is 0 it is a new entry, if it is not then the textValue may include the index value
@@ -732,7 +729,7 @@ function  processPhoneSuccess(xhr){
 					<html:select name="qaEvents" styleId='<%="section" + index%>'
 						styleClass="readOnly qaEventElement" disabled="false"
 						property="section" indexed="true" style="width: 99%"
-						onchange='makeDirty();showSection(this);'>
+						onchange='makeDirty();'>
 						<option ></option>
 						<html:optionsCollection name="<%=formName%>" property="sections"
 							label="localizedName" value="nameKey" />

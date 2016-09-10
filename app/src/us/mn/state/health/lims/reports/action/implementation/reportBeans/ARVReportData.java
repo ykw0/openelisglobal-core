@@ -73,8 +73,7 @@ public class ARVReportData {
 	private Boolean duplicateReport = Boolean.FALSE;
 	
 	private List<SampleQaEvent> sampleQAEventList;
-	List<QaEventItem> qaEventItems;
-	
+	private String allQaEvents=null;
 	private String biochemistryQaEvent=null;
 	private String virologyQaEvent=null;
 	private String serologyQaEvent=null;
@@ -338,25 +337,31 @@ public class ARVReportData {
 	 * @param sample
 	 * @return
 	 */
+	public String getAllQaEvents(){
+		return allQaEvents;
+	}
+	public void setAllQaEvents(String allQaEvents){
+		this.allQaEvents=allQaEvents;
+	}
 	public void getSampleQaEventItems(Sample sample){
-	    qaEventItems = new ArrayList<QaEventItem>();
 		if(sample != null){
 			getSampleQaEvents(sample);
 			for(SampleQaEvent event : sampleQAEventList){
 				QAService qa = new QAService(event);
-				if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Biochemistry"))
+				allQaEvents=allQaEvents==null?qa.getQAEvent().getLocalizedName():allQaEvents+";"+qa.getQAEvent().getLocalizedName();
+				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Biochemistry"))
 					biochemistryQaEvent=biochemistryQaEvent==null ? qa.getQAEvent().getLocalizedName() : biochemistryQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 				
-				else if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
+				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
 					virologyQaEvent=virologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 	
-				else if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Serology"))
+				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Serology"))
 					serologyQaEvent=serologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : serologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 	
-				else if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Immunology"))
+				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Immunology"))
 				     immunologyQaEvent=immunologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : immunologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 				
-				else if(qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Hematology"))
+				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Hematology"))
 					 hematologyQaEvent=hematologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : hematologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 
 			}
