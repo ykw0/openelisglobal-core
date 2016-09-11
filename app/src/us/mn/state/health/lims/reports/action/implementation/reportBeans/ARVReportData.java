@@ -372,12 +372,7 @@ public class ARVReportData {
 
 			}
 		}
-		
-		//int oldQaEvents = qaEventItems.size();
-		//for(int i = oldQaEvents; i < 10; i++){
-		//	qaEventItems.add(new QaEventItem());
-		//}
-		//return qaEventItems;
+
 	}
 	public void getSampleQaEvents(Sample sample){
 		SampleQaEventDAO sampleQaEventDAO = new SampleQaEventDAOImpl();

@@ -80,6 +80,8 @@ public class ReportImplementationFactory{
 				return new IndicatorHaitiSiteTestCountReport();
 			}else if(report.equals("retroCIFollowupRequiredByLocation")){
 				return new RetroCIFollowupRequiredByLocation();
+			}if(report.equals("retroCInonConformityByLabno")){
+				return new ReportSpecificationParameters(Parameter.ACCESSION_RANGE, StringUtil.getMessageForKey("reports.label.patient.ARV.all"),null);
 			}else if(report.equals("retroCInonConformityNotification")){
 				return new RetroCINonConformityNotification();
 			}else if(report.equals("patientCollection")){
@@ -180,6 +182,8 @@ public class ReportImplementationFactory{
 				return new HaitiNonConformityByDate();
 			}else if(report.equals("retroCInonConformityBySectionReason")){
 				return new RetroCINonConformityBySectionReason();
+			}else if(report.equals("retroCInonConformityByLabno")){
+				return new RetroCINonConformityByLabno();
 			}else if(report.equals("haitiNonConformityBySectionReason")){
 				return new HaitiNonConformityBySectionReason();
 			}else if(report.equals("haitiClinicalNonConformityBySectionReason")){
