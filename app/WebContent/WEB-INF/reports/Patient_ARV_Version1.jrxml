@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="856"/>
+	<property name="ireport.y" value="777"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -108,18 +108,18 @@
 			</line>
 			<subreport>
 				<reportElement x="0" y="0" width="552" height="134"/>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="leftHeaderImage">
 					<subreportParameterExpression><![CDATA[$P{leftHeaderImage}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
-				<subreportParameter name="duplicateReport">
-					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
 				<subreportParameter name="status">
 					<subreportParameterExpression><![CDATA[$F{status}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="duplicateReport">
+					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="studyName">
 					<subreportParameterExpression><![CDATA[$P{studyName}]]></subreportParameterExpression>
@@ -483,7 +483,7 @@
 				<text><![CDATA[Diagnostic Clinique]]></text>
 			</staticText>
 		</band>
-		<band height="429">
+		<band height="454">
 			<printWhenExpression><![CDATA[$F{allQaEvents}!=null]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="1" y="187" width="551" height="41"/>
@@ -537,31 +537,28 @@
 				<text><![CDATA[RAPPORT DE NON-CONFORMITE CLIENT]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="1" y="227" width="551" height="19"/>
+				<reportElement x="1" y="227" width="551" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="246" width="551" height="19"/>
+				<reportElement x="1" y="240" width="551" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="246" width="551" height="19"/>
+				<reportElement x="1" y="253" width="551" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="265" width="551" height="19"/>
+				<reportElement x="1" y="292" width="551" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="322" width="551" height="19"/>
+				<reportElement x="1" y="279" width="551" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="303" width="551" height="19"/>
+				<reportElement x="1" y="266" width="551" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="284" width="551" height="19"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="341" width="551" height="19"/>
+				<reportElement x="1" y="305" width="551" height="13"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="5" y="343" width="166" height="20"/>
+				<reportElement x="5" y="305" width="166" height="13"/>
 				<textElement/>
 				<text><![CDATA[Elution du disque DBS impossible]]></text>
 			</staticText>
@@ -569,166 +566,199 @@
 				<reportElement x="171" y="227" width="100" height="1"/>
 			</line>
 			<line>
-				<reportElement x="171" y="228" width="1" height="132"/>
+				<reportElement x="171" y="228" width="1" height="90"/>
 			</line>
 			<staticText>
-				<reportElement x="5" y="228" width="165" height="16"/>
+				<reportElement x="5" y="227" width="165" height="13"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<text><![CDATA[Echantillon Coagulé]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="247" width="165" height="20"/>
+				<reportElement x="5" y="240" width="165" height="13"/>
 				<textElement/>
 				<text><![CDATA[Echantillon Insuffisant]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="266" width="165" height="20"/>
+				<reportElement x="5" y="253" width="165" height="13"/>
 				<textElement/>
 				<text><![CDATA[Echantillon Hémolysé]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="286" width="164" height="20"/>
+				<reportElement x="5" y="266" width="164" height="13"/>
 				<textElement/>
 				<text><![CDATA[Echantillon lactescent]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="304" width="164" height="20"/>
+				<reportElement x="5" y="279" width="164" height="13"/>
 				<textElement/>
 				<text><![CDATA[Echantillon opalescent]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="323" width="164" height="20"/>
+				<reportElement x="5" y="292" width="164" height="13"/>
 				<textElement/>
 				<text><![CDATA[Echantillon mal ou non étiqueté]]></text>
 			</staticText>
 			<line>
-				<reportElement x="359" y="228" width="1" height="132"/>
+				<reportElement x="359" y="228" width="1" height="90"/>
 			</line>
 			<staticText>
-				<reportElement x="173" y="228" width="183" height="20">
+				<reportElement x="173" y="227" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.coagulated"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.coagulated"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.coagulated"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="228" width="183" height="20">
+				<reportElement x="361" y="227" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.coagulated"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.coagulated"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="173" y="247" width="183" height="20">
+				<reportElement x="173" y="240" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.insufficient"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.insufficient"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.insufficient"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="247" width="183" height="20">
+				<reportElement mode="Transparent" x="361" y="240" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.insufficient"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.insufficient"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="173" y="266" width="183" height="20">
+				<reportElement x="173" y="253" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.hemolytic"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.hemolytic"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.hemolytic"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="266" width="183" height="20">
+				<reportElement x="361" y="253" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.hemolytic"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.hemolytic"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="173" y="285" width="183" height="20"/>
+				<reportElement x="173" y="266" width="183" height="13"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="285" width="183" height="20"/>
+				<reportElement x="361" y="266" width="183" height="13"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="173" y="304" width="183" height="20"/>
+				<reportElement x="173" y="279" width="183" height="13"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="304" width="183" height="20"/>
+				<reportElement x="361" y="279" width="183" height="13"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="173" y="323" width="183" height="20">
+				<reportElement x="173" y="292" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.mislabled"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.mislabled"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.mislabled"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="323" width="183" height="20">
+				<reportElement x="361" y="292" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.dryTube:qa_event.mislabled"))||
 ($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Serum:qa_event.mislabled"))]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="173" y="342" width="183" height="20"/>
+				<reportElement x="173" y="305" width="183" height="13"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="342" width="183" height="20"/>
+				<reportElement x="361" y="305" width="183" height="13"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="318" width="551" height="38"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="323" width="296" height="13"/>
+				<textElement/>
+				<text><![CDATA[Fiche de prélèvement mal renseignée              ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="338" width="350" height="13"/>
+				<textElement/>
+				<text><![CDATA[Discordance d’information entre Fiche de prélèvement et Fiche démographique]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="472" y="322" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="478" y="323" width="25" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="472" y="338" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="478" y="339" width="25" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
