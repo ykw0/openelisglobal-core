@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="911"/>
+	<property name="ireport.y" value="762"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -59,6 +59,11 @@
 	<field name="showSerologie" class="java.lang.Boolean"/>
 	<field name="duplicateReport" class="java.lang.Boolean"/>
 	<field name="allQaEvents" class="java.lang.String"/>
+	<field name="biochemistryQaEvent" class="java.lang.String"/>
+	<field name="virologyQaEvent" class="java.lang.String"/>
+	<field name="serologyQaEvent" class="java.lang.String"/>
+	<field name="immunologyQaEvent" class="java.lang.String"/>
+	<field name="hematologyQaEvent" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -108,18 +113,18 @@
 			</line>
 			<subreport>
 				<reportElement x="0" y="0" width="552" height="134"/>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="leftHeaderImage">
 					<subreportParameterExpression><![CDATA[$P{leftHeaderImage}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
-				<subreportParameter name="duplicateReport">
-					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="OPENREPORTS_REPORT_DIR"/>
 				<subreportParameter name="status">
 					<subreportParameterExpression><![CDATA[$F{status}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="duplicateReport">
+					<subreportParameterExpression><![CDATA[$F{duplicateReport}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="studyName">
 					<subreportParameterExpression><![CDATA[$P{studyName}]]></subreportParameterExpression>
@@ -407,7 +412,7 @@
 				<text><![CDATA[Sérologie VIH :]]></text>
 			</staticText>
 			<textField isBlankWhenNull="false">
-				<reportElement key="textField-8" x="6" y="305" width="62" height="18" isRemoveLineWhenBlank="true">
+				<reportElement key="textField-8" x="6" y="309" width="62" height="18" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$P{showSerologie} || $F{showSerologie}]]></printWhenExpression>
 				</reportElement>
 				<textElement/>
@@ -482,15 +487,55 @@
 				</textElement>
 				<text><![CDATA[Diagnostic Clinique]]></text>
 			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-40" x="136" y="36" width="370" height="17" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{hematologyQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{hematologyQaEvent}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-190" x="141" y="155" width="365" height="19" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{immunologyQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{immunologyQaEvent}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-170" x="144" y="225" width="368" height="18" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{biochemistryQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{biochemistryQaEvent}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-80" x="144" y="307" width="365" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{showSerologie} || $F{showSerologie}]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{serologyQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{serologyQaEvent}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-20" x="144" y="366" width="368" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{showVirologie} || $F{showVirologie}]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{virologyQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{virologyQaEvent}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="472">
 			<printWhenExpression><![CDATA[$F{allQaEvents}!=null]]></printWhenExpression>
-			<rectangle>
-				<reportElement x="1" y="108" width="551" height="41"/>
-			</rectangle>
+			<staticText>
+				<reportElement x="0" y="82" width="552" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAPPORT DE NON-CONFORMITE CLIENT]]></text>
+			</staticText>
 			<rectangle>
 				<reportElement x="1" y="108" width="170" height="40"/>
 			</rectangle>
+			<staticText>
+				<reportElement x="11" y="114" width="157" height="34"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOTIF DU REFUS]]></text>
+			</staticText>
 			<rectangle>
 				<reportElement x="171" y="108" width="381" height="20"/>
 			</rectangle>
@@ -501,9 +546,11 @@
 				</textElement>
 				<text><![CDATA[Echantillon en tube : ]]></text>
 			</staticText>
-			<rectangle>
-				<reportElement x="359" y="128" width="193" height="20"/>
-			</rectangle>
+			<staticText>
+				<reportElement x="302" y="107" width="241" height="20"/>
+				<textElement/>
+				<text><![CDATA[Type de tube/Type d’échantillon]]></text>
+			</staticText>
 			<rectangle>
 				<reportElement x="171" y="128" width="188" height="20"/>
 			</rectangle>
@@ -512,62 +559,17 @@
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Tube EDTA/Sang total/Plasma]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="359" y="128" width="193" height="20"/>
+			</rectangle>
 			<staticText>
 				<reportElement x="359" y="129" width="191" height="20"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Tube Sec/ Sérum ]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="11" y="114" width="157" height="34"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[MOTIF DU REFUS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="302" y="107" width="241" height="20"/>
-				<textElement/>
-				<text><![CDATA[Type de tube/Type d’échantillon]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="82" width="552" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[RAPPORT DE NON-CONFORMITE CLIENT]]></text>
-			</staticText>
 			<rectangle>
 				<reportElement x="1" y="148" width="551" height="13"/>
 			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="161" width="551" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="174" width="551" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="213" width="551" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="200" width="551" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="187" width="551" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="226" width="551" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="5" y="226" width="166" height="13"/>
-				<textElement/>
-				<text><![CDATA[Elution du disque DBS impossible]]></text>
-			</staticText>
-			<line>
-				<reportElement x="171" y="148" width="100" height="1"/>
-			</line>
-			<line>
-				<reportElement x="171" y="149" width="1" height="90"/>
-			</line>
 			<staticText>
 				<reportElement x="5" y="148" width="165" height="13"/>
 				<textElement>
@@ -575,34 +577,6 @@
 				</textElement>
 				<text><![CDATA[Echantillon Coagulé]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="5" y="161" width="165" height="13"/>
-				<textElement/>
-				<text><![CDATA[Echantillon Insuffisant]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="5" y="174" width="165" height="13"/>
-				<textElement/>
-				<text><![CDATA[Echantillon Hémolysé]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="5" y="187" width="164" height="13"/>
-				<textElement/>
-				<text><![CDATA[Echantillon lactescent]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="5" y="200" width="164" height="13"/>
-				<textElement/>
-				<text><![CDATA[Echantillon opalescent]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="5" y="213" width="164" height="13"/>
-				<textElement/>
-				<text><![CDATA[Echantillon mal ou non étiqueté]]></text>
-			</staticText>
-			<line>
-				<reportElement x="359" y="149" width="1" height="90"/>
-			</line>
 			<staticText>
 				<reportElement x="173" y="148" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.coagulated"))||
@@ -623,6 +597,14 @@
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="161" width="551" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="161" width="165" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon Insuffisant]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="173" y="161" width="183" height="13">
@@ -645,6 +627,14 @@
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="1" y="174" width="551" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="174" width="165" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon Hémolysé]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="173" y="174" width="183" height="13">
 					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.hemolytic"))||
@@ -666,6 +656,14 @@
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="1" y="187" width="551" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="187" width="164" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon lactescent]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="173" y="187" width="183" height="13"/>
 				<textElement textAlignment="Center">
@@ -680,6 +678,14 @@
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="1" y="200" width="551" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="200" width="164" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon opalescent]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="173" y="200" width="183" height="13"/>
 				<textElement textAlignment="Center">
@@ -693,6 +699,14 @@
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="213" width="551" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="213" width="164" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon mal ou non étiqueté]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="173" y="213" width="183" height="13">
@@ -715,6 +729,14 @@
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="1" y="226" width="551" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="226" width="166" height="13"/>
+				<textElement/>
+				<text><![CDATA[Elution du disque DBS impossible]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="173" y="226" width="183" height="13"/>
 				<textElement textAlignment="Center">
@@ -729,109 +751,92 @@
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
+			<line>
+				<reportElement x="171" y="149" width="1" height="90"/>
+			</line>
+			<line>
+				<reportElement x="359" y="149" width="1" height="90"/>
+			</line>
 			<rectangle>
-				<reportElement x="1" y="239" width="551" height="38"/>
+				<reportElement x="1" y="239" width="551" height="32"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="5" y="244" width="296" height="13"/>
+				<reportElement x="5" y="242" width="296" height="13"/>
 				<textElement/>
 				<text><![CDATA[Fiche de prélèvement mal renseignée              ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="6" y="259" width="350" height="13"/>
+				<reportElement x="6" y="256" width="350" height="13"/>
 				<textElement/>
 				<text><![CDATA[Discordance d’information entre Fiche de prélèvement et Fiche démographique]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="472" y="243" width="35" height="13"/>
+				<reportElement x="472" y="241" width="35" height="13"/>
 			</rectangle>
-			<staticText>
-				<reportElement x="478" y="243" width="25" height="13"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[X]]></text>
-			</staticText>
 			<rectangle>
-				<reportElement x="472" y="259" width="35" height="13"/>
+				<reportElement x="472" y="256" width="35" height="13"/>
 			</rectangle>
-			<staticText>
-				<reportElement x="478" y="259" width="25" height="13"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[X]]></text>
-			</staticText>
 			<rectangle>
-				<reportElement x="1" y="277" width="551" height="38"/>
+				<reportElement x="1" y="271" width="551" height="32"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="478" y="281" width="25" height="13"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[X]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="155" y="297" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="478" y="297" width="25" height="13"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[X]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="5" y="282" width="150" height="13"/>
+				<reportElement x="5" y="274" width="150" height="13"/>
 				<textElement/>
 				<text><![CDATA[Fiche sans Echantillon]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="155" y="273" width="35" height="13"/>
+			</rectangle>
 			<staticText>
-				<reportElement x="6" y="297" width="149" height="13"/>
+				<reportElement x="6" y="288" width="149" height="13"/>
 				<textElement/>
 				<text><![CDATA[Echantillon sans fiche ]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="155" y="281" width="35" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="472" y="281" width="35" height="13"/>
+				<reportElement x="155" y="288" width="35" height="13"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="236" y="297" width="234" height="13"/>
+				<reportElement x="235" y="274" width="235" height="13"/>
+				<textElement/>
+				<text><![CDATA[Absence de l’identité du préleveur]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="472" y="273" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="236" y="288" width="234" height="13"/>
 				<textElement/>
 				<text><![CDATA[Absence de l’heure du prélèvement]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="472" y="297" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="235" y="282" width="235" height="13"/>
-				<textElement/>
-				<text><![CDATA[Absence de l’identité du préleveur]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="472" y="319" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="235" y="320" width="235" height="13"/>
-				<textElement/>
-				<text><![CDATA[Absence de l’identité du préleveur]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="155" y="319" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="6" y="335" width="149" height="13"/>
-				<textElement/>
-				<text><![CDATA[Echantillon sans fiche ]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="155" y="335" width="35" height="13"/>
+				<reportElement x="472" y="288" width="35" height="13"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="1" y="315" width="551" height="38"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="321" width="150" height="13"/>
+				<textElement/>
+				<text><![CDATA[Tube maculé de sang]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="320" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="337" width="149" height="13"/>
+				<textElement/>
+				<text><![CDATA[Fiche entachée de sang]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="337" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="235" y="321" width="235" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon pour charge virale de plus de 6h]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="472" y="319" width="35" height="13"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="236" y="336" width="234" height="13"/>
@@ -842,112 +847,94 @@
 				<reportElement x="472" y="337" width="35" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="472" y="320" width="35" height="13"/>
+				<reportElement x="1" y="353" width="551" height="22"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="235" y="321" width="235" height="13"/>
-				<textElement/>
-				<text><![CDATA[Echantillon pour charge virale de plus de 6h]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="155" y="320" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="5" y="321" width="150" height="13"/>
-				<textElement/>
-				<text><![CDATA[Tube maculé de sang]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="6" y="337" width="149" height="13"/>
-				<textElement/>
-				<text><![CDATA[Fiche entachée de sang]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="155" y="337" width="35" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="155" y="375" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="235" y="358" width="235" height="13"/>
-				<textElement/>
-				<text><![CDATA[Absence de l’identité du préleveur]]></text>
+				<reportElement x="5" y="359" width="150" height="16"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DBS]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="155" y="358" width="35" height="13"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="472" y="357" width="35" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="472" y="358" width="35" height="13"/>
+				<reportElement x="1" y="375" width="551" height="38"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="236" y="374" width="234" height="13"/>
-				<textElement/>
-				<text><![CDATA[Erreur de tube de prélèvement]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="6" y="375" width="149" height="13"/>
-				<textElement/>
-				<text><![CDATA[Fiche entachée de sang]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="472" y="375" width="35" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="353" width="551" height="38"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="155" y="360" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="5" y="359" width="150" height="16"/>
+				<reportElement x="5" y="381" width="150" height="16"/>
 				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DBS]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="155" y="413" width="35" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="155" y="396" width="35" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="472" y="396" width="35" height="13"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="236" y="412" width="234" height="13"/>
-				<textElement/>
-				<text><![CDATA[Erreur de tube de prélèvement]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="6" y="413" width="149" height="13"/>
-				<textElement/>
-				<text><![CDATA[Fiche entachée de sang]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="472" y="413" width="35" height="13"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="1" y="391" width="551" height="38"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="5" y="397" width="150" height="16"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[AUTRES MOTIFS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7" y="415" width="543" height="13"/>
+				<reportElement x="7" y="399" width="543" height="13"/>
 				<textElement/>
 				<text><![CDATA[A décrire :…………………………………………………………………….................................................................………….]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="155" y="397" width="35" height="13"/>
+				<reportElement x="155" y="381" width="35" height="13"/>
 			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="437" width="551" height="34"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="437" width="85" height="16"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONCLUSION :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="452" width="195" height="16"/>
+				<textElement>
+					<font size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Prière refaire le prélèvement sur :                      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="437" width="361" height="16"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[L’échantillon ne peut être traité ou analysé ce jour. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="453" width="352" height="16"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tube EDTA                Tube sec          Carte DBS Whatman 903]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="414" width="57" height="16"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Section:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="414" width="36" height="16"/>
+				<textElement/>
+				<text><![CDATA[Saisie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="414" width="62" height="16"/>
+				<textElement/>
+				<text><![CDATA[Réception]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="414" width="76" height="16"/>
+				<textElement/>
+				<text><![CDATA[Biochimie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="414" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[Immunologie(CD4) ]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
