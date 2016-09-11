@@ -746,7 +746,7 @@
 				<reportElement x="472" y="322" width="35" height="13"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="478" y="323" width="25" height="13"/>
+				<reportElement x="478" y="322" width="25" height="13"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
@@ -756,12 +756,115 @@
 				<reportElement x="472" y="338" width="35" height="13"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="478" y="339" width="25" height="13"/>
+				<reportElement x="478" y="338" width="25" height="13"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="1" y="356" width="551" height="38"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="478" y="360" width="25" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="376" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="478" y="376" width="25" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="361" width="150" height="13"/>
+				<textElement/>
+				<text><![CDATA[Fiche sans Echantillon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="376" width="149" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon sans fiche ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="360" width="35" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="472" y="360" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="236" y="376" width="234" height="13"/>
+				<textElement/>
+				<text><![CDATA[Absence de l’heure du prélèvement]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="472" y="376" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="235" y="361" width="235" height="13"/>
+				<textElement/>
+				<text><![CDATA[Absence de l’identité du préleveur]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="472" y="398" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="235" y="399" width="235" height="13"/>
+				<textElement/>
+				<text><![CDATA[Absence de l’identité du préleveur]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="398" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="414" width="149" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon sans fiche ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="414" width="35" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="394" width="551" height="38"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="236" y="415" width="234" height="13"/>
+				<textElement/>
+				<text><![CDATA[Erreur de tube de prélèvement]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="472" y="416" width="35" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="472" y="399" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="235" y="400" width="235" height="13"/>
+				<textElement/>
+				<text><![CDATA[Echantillon pour charge virale de plus de 6h]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="399" width="35" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="400" width="150" height="13"/>
+				<textElement/>
+				<text><![CDATA[Tube maculé de sang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="416" width="149" height="13"/>
+				<textElement/>
+				<text><![CDATA[Fiche entachée de sang]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="155" y="416" width="35" height="13"/>
+			</rectangle>
 		</band>
 	</detail>
 	<columnFooter>
