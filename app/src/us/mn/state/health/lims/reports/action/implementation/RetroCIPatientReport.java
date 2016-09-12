@@ -76,7 +76,6 @@ public abstract class RetroCIPatientReport extends RetroCIReport {
 
 		if (valid) {
 			List<Sample> reportSampleList = findReportSamples(lowerNumber, upperNumber);
-
 			if (reportSampleList.isEmpty()) {
 				errorFound = true;
 				ErrorMessages msgs = new ErrorMessages();
