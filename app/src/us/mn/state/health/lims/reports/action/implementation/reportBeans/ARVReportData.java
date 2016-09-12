@@ -316,7 +316,7 @@ public class ARVReportData {
 		this.virologyQaEvent = virologyQaEvent;
 	}
 	public String getSerologyQaEvent() {
-		return virologyQaEvent;
+		return serologyQaEvent;
 	}
 	public void setSerologyQaEvent(String serologyQaEvent) {
 		this.serologyQaEvent = serologyQaEvent;
