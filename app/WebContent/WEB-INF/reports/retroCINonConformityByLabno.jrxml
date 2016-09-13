@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="420"/>
+	<property name="ireport.y" value="0"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -23,25 +23,6 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="gb" class="java.lang.String"/>
-	<field name="gr" class="java.lang.String"/>
-	<field name="hb" class="java.lang.String"/>
-	<field name="hct" class="java.lang.String"/>
-	<field name="vgm" class="java.lang.String"/>
-	<field name="plq" class="java.lang.String"/>
-	<field name="eoper" class="java.lang.String"/>
-	<field name="bper" class="java.lang.String"/>
-	<field name="nper" class="java.lang.String"/>
-	<field name="lper" class="java.lang.String"/>
-	<field name="mper" class="java.lang.String"/>
-	<field name="creatininemie" class="java.lang.String"/>
-	<field name="vih" class="java.lang.String"/>
-	<field name="ampli2" class="java.lang.String"/>
-	<field name="sgot" class="java.lang.String"/>
-	<field name="glyc" class="java.lang.String"/>
-	<field name="cd4per" class="java.lang.String"/>
-	<field name="cd4" class="java.lang.String"/>
-	<field name="ampli2lo" class="java.lang.String"/>
 	<field name="subjectNumber" class="java.lang.String"/>
 	<field name="birth_date" class="java.lang.String"/>
 	<field name="age" class="java.lang.String"/>
@@ -50,9 +31,6 @@
 	<field name="orgname" class="java.lang.String"/>
 	<field name="doctor" class="java.lang.String"/>
 	<field name="labNo" class="java.lang.String"/>
-	<field name="sgpt" class="java.lang.String"/>
-	<field name="ccmh" class="java.lang.String"/>
-	<field name="tcmh" class="java.lang.String"/>
 	<field name="status" class="java.lang.String"/>
 	<field name="receptiondate" class="java.lang.String"/>
 	<field name="showVirologie" class="java.lang.Boolean"/>
@@ -145,6 +123,7 @@
 	</columnHeader>
 	<detail>
 		<band height="412">
+			<printWhenExpression><![CDATA[$F{allQaEvents}!=null]]></printWhenExpression>
 			<staticText>
 				<reportElement x="0" y="10" width="552" height="20"/>
 				<textElement textAlignment="Center">
@@ -612,13 +591,22 @@
 				</graphicElement>
 			</line>
 		</band>
+		<band height="311">
+			<staticText>
+				<reportElement x="155" y="134" width="257" height="41"/>
+				<textElement rotation="None">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No QaEvent]]></text>
+			</staticText>
+		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="143" splitType="Prevent">
-			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+			<printWhenExpression><![CDATA[$F{allQaEvents}==null]]></printWhenExpression>
 		</band>
 	</pageFooter>
 	<summary>
