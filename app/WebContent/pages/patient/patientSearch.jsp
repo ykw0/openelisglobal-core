@@ -270,6 +270,7 @@ function /*void*/ dirtySearchInfo(e){
 		newSearchInfo = true; 
 	}
 }
+
 function enableSearchButton(eventCode){
     var valueElem = $jq("#searchValue");
     var criteriaElem  = $jq('#searchCriteria');
