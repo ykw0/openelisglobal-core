@@ -55,7 +55,7 @@ public class EIDReportData {
 	private List<SampleQaEvent> sampleQAEventList;
 	List<QaEventItem> qaEventItems;
 	
-	private String eidQaEvent=null;
+	private String virologyEidQaEvent=null;
 
 	public String getHiv_status() {
 		return hiv_status;
@@ -179,11 +179,11 @@ public class EIDReportData {
 	public void setDuplicateReport(Boolean duplicateReport) {
 		this.duplicateReport = duplicateReport;
 	}
-	public String getEidQaEvent() {
-		return eidQaEvent;
+	public String getVirologyEidQaEvent() {
+		return virologyEidQaEvent;
 	}
-	public void setEidQaEvent(String eidQaEvent) {
-		this.eidQaEvent = eidQaEvent;
+	public void setVirologyEidQaEvent(String virologyEidQaEvent) {
+		this.virologyEidQaEvent = virologyEidQaEvent;
 	}
 	/**
 	 * @param sample
@@ -196,8 +196,8 @@ public class EIDReportData {
 			for(SampleQaEvent event : sampleQAEventList){
 				QAService qa = new QAService(event);
 					
-				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.PCR"))
-					eidQaEvent=eidQaEvent==null ? qa.getQAEvent().getLocalizedName() : eidQaEvent+" , "+qa.getQAEvent().getLocalizedName();
+				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.EID"))
+					virologyEidQaEvent=virologyEidQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyEidQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 	
 				
 			}

@@ -55,7 +55,7 @@ public class VLReportData {
 	private List<SampleQaEvent> sampleQAEventList;
 	List<QaEventItem> qaEventItems;
 	
-	private String virologyQaEvent=null;
+	private String virologyVlQaEvent=null;
 
 
 	public String getSubjectno() {
@@ -179,11 +179,11 @@ public class VLReportData {
 	public void setDuplicateReport(Boolean duplicateReport) {
 		this.duplicateReport = duplicateReport;
 	}
-	public String getVirologyQaEvent() {
-		return virologyQaEvent;
+	public String getVirologyVlQaEvent() {
+		return virologyVlQaEvent;
 	}
-	public void setVirologyQaEvent(String virologyQaEvent) {
-		this.virologyQaEvent = virologyQaEvent;
+	public void setVirologyVlQaEvent(String virologyVlQaEvent) {
+		this.virologyVlQaEvent = virologyVlQaEvent;
 	}
 	/**
 	 * @param sample
@@ -196,8 +196,8 @@ public class VLReportData {
 			for(SampleQaEvent event : sampleQAEventList){
 				QAService qa = new QAService(event);
 					
-				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
-					virologyQaEvent=virologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
+				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.VL"))
+					virologyVlQaEvent=virologyVlQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyVlQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 	
 				
 			}

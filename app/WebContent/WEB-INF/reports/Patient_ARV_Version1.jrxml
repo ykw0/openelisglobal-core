@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="833"/>
+	<property name="ireport.y" value="342"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -64,6 +64,7 @@
 	<field name="serologyQaEvent" class="java.lang.String"/>
 	<field name="immunologyQaEvent" class="java.lang.String"/>
 	<field name="hematologyQaEvent" class="java.lang.String"/>
+	<field name="virologyVlQaEvent" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -514,7 +515,7 @@
 					<printWhenExpression><![CDATA[$P{showVirologie} || $F{showVirologie}]]></printWhenExpression>
 				</reportElement>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{virologyQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{virologyQaEvent}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{virologyVlQaEvent} == null ? "Etat de l'échantillon:Normal" :  "Etat de l'échantillon:"+$F{virologyVlQaEvent}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="472">

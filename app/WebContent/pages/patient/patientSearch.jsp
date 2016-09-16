@@ -36,7 +36,7 @@
   	supportSubjectNumber = FormFields.getInstance().useField(Field.SubjectNumber);
   	supportNationalID = FormFields.getInstance().useField(Field.NationalID);
   	supportLabNumber = FormFields.getInstance().useField(Field.SEARCH_PATIENT_WITH_LAB_NO);
- 	accessionNumberValidator = new ProgramAccessionValidator();//new AccessionNumberValidatorFactory().getValidator();
+ 	accessionNumberValidator = new AccessionNumberValidatorFactory().getValidator();
  	String path = request.getContextPath();
  	basePath = request.getScheme() + "://" + request.getServerName() + ":"	+ request.getServerPort() + path + "/";
  %>
@@ -270,7 +270,6 @@ function /*void*/ dirtySearchInfo(e){
 		newSearchInfo = true; 
 	}
 }
-
 function enableSearchButton(eventCode){
     var valueElem = $jq("#searchValue");
     var criteriaElem  = $jq('#searchCriteria');

@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="722"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -122,7 +122,7 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="412">
+		<band height="403">
 			<printWhenExpression><![CDATA[$F{allQaEvents}!=null]]></printWhenExpression>
 			<staticText>
 				<reportElement x="0" y="10" width="552" height="20"/>
@@ -592,6 +592,7 @@
 			</line>
 		</band>
 		<band height="311">
+			<printWhenExpression><![CDATA[$F{allQaEvents}==null]]></printWhenExpression>
 			<staticText>
 				<reportElement x="155" y="134" width="257" height="41"/>
 				<textElement rotation="None">
@@ -606,7 +607,15 @@
 	</columnFooter>
 	<pageFooter>
 		<band height="143" splitType="Prevent">
-			<printWhenExpression><![CDATA[$F{allQaEvents}==null]]></printWhenExpression>
+			<staticText>
+				<reportElement x="321" y="3" width="220" height="33"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Signature, date (jj/mm/aaaa), et
+cachet du Laboratoire/Biologiste
+]]></text>
+			</staticText>
 		</band>
 	</pageFooter>
 	<summary>

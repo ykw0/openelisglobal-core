@@ -76,6 +76,8 @@ public class ARVReportData {
 	private String allQaEvents=null;
 	private String biochemistryQaEvent=null;
 	private String virologyQaEvent=null;
+	private String virologyEidQaEvent=null;
+	private String virologyVlQaEvent=null;
 	private String serologyQaEvent=null;
 	private String immunologyQaEvent=null;
 	private String hematologyQaEvent=null;
@@ -315,6 +317,18 @@ public class ARVReportData {
 	public void setVirologyQaEvent(String virologyQaEvent) {
 		this.virologyQaEvent = virologyQaEvent;
 	}
+	public String getVirologyEidQaEvent() {
+		return virologyEidQaEvent;
+	}
+	public void setVirologyEidQaEvent(String virologyEidQaEvent) {
+		this.virologyEidQaEvent = virologyEidQaEvent;
+	}
+	public String getVirologyVlQaEvent() {
+		return virologyVlQaEvent;
+	}
+	public void setVirologyVlQaEvent(String virologyVlQaEvent) {
+		this.virologyVlQaEvent = virologyVlQaEvent;
+	}
 	public String getSerologyQaEvent() {
 		return serologyQaEvent;
 	}
@@ -360,7 +374,13 @@ public class ARVReportData {
 				
 				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
 					virologyQaEvent=virologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
-	
+
+				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.VL"))
+					virologyVlQaEvent=virologyVlQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyVlQaEvent+" , "+qa.getQAEvent().getLocalizedName();
+
+				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.EID"))
+					virologyEidQaEvent=virologyEidQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyEidQaEvent+" , "+qa.getQAEvent().getLocalizedName();
+
 				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Serology"))
 					serologyQaEvent=serologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : serologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 	
