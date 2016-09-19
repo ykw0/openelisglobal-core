@@ -222,42 +222,7 @@ public class AnalysisService{
         return analysis == null ? null : analysis.getTestSection();
     }
 
-    public Analysis getPatientPreviousAnalysisForTestName(Patient patient,Sample currentSample, String testName){
-		SampleHumanDAO sampleHumanDAO = new SampleHumanDAOImpl();
-		List<Sample> sampList=sampleHumanDAO.getSamplesForPatient(patient.getId());
-		Analysis previousAnalysis=null;
-		List<Integer> sampIDList= new ArrayList<Integer>();
-		List<Integer> testIDList= new ArrayList<Integer>();
-		
-		TestDAO testDAO=new TestDAOImpl();
-		testIDList.add(Integer.parseInt(testDAO.getTestByName(testName).getId()));
-		
-		if (sampList.isEmpty()) return previousAnalysis;
-		
-		for(Sample sample : sampList){
-			sampIDList.add(Integer.parseInt(sample.getId()));
-		}	
-		
-		List<Integer> statusList = new ArrayList<Integer>();
-		statusList.add(Integer.parseInt(StatusService.getInstance().getStatusID(AnalysisStatus.Finalized)));
-	
-		AnalysisDAO analysisDAO = new AnalysisDAOImpl();
-		List<Analysis> analysisList = analysisDAO.getAnalysesBySampleIdTestIdAndStatusId(sampIDList,testIDList, statusList);
-		
-		if (analysisList.isEmpty()) return previousAnalysis;
-		
-		for(int i=0;i<analysisList.size();i++){
-		  if(i<analysisList.size() && currentSample.getAccessionNumber().equals(analysisList.get(i).getSampleItem().getSample().getAccessionNumber())){
-			previousAnalysis=analysisList.get(i+1);
-			return previousAnalysis;
-		  }
-		
-		}
-		return previousAnalysis;
-		
-	}
-
-	public static Analysis buildAnalysis(Test test, SampleItem sampleItem){
+    public static Analysis buildAnalysis(Test test, SampleItem sampleItem){
 
             Analysis analysis = new Analysis();
             analysis.setTest(test);

@@ -32,6 +32,7 @@ import us.mn.state.health.lims.common.util.StringUtil;
 import us.mn.state.health.lims.dictionary.dao.DictionaryDAO;
 import us.mn.state.health.lims.dictionary.daoimpl.DictionaryDAOImpl;
 import us.mn.state.health.lims.dictionary.valueholder.Dictionary;
+import us.mn.state.health.lims.patient.valueholder.Patient;
 import us.mn.state.health.lims.reports.action.implementation.reportBeans.ARVReportData;
 import us.mn.state.health.lims.result.dao.ResultDAO;
 import us.mn.state.health.lims.result.daoimpl.ResultDAOImpl;
@@ -97,7 +98,7 @@ public abstract class PatientARVReport extends RetroCIPatientReport{
 		
 		setPatientInfo(data);
 		setTestInfo(data);
-		setPreviousTestInfo(data);
+		setPreviousTestInfo(data);System.out.println("previousResultMap="+data.getPreviousResultMap());
 		reportItems.add(data);
 
 	}
@@ -236,72 +237,95 @@ public abstract class PatientARVReport extends RetroCIPatientReport{
 		}
 	}
 
-	protected void setPreviousTestInfo(ARVReportData data){	
-		Sample currentSample=reportSample;
-		SampleService sampleSercice=new SampleService(currentSample);
-		///////////
+	protected void setPreviousTestInfo(ARVReportData data){
+		AnalysisDAO analysisDAO = new AnalysisDAOImpl();
+		DictionaryDAO dictionaryDAO = new DictionaryDAOImpl();
+		ResultDAO resultDAO = new ResultDAOImpl();
+	
+		if( GenericValidator.isBlankOrNull(StringUtil.getMessageForKey("previous.test.to.report")))
+		return;
+		
 		String[] testList=StringUtil.getMessageForKey("previous.test.to.report").split(",");
+		
 		for(int i=0;i<testList.length;i++){
-		Sample previousSample=sampleSercice.getPatientPreviousSampleForTestName(reportPatient ,testList[i]);
-		reportSample=previousSample;
-		setTestInfo(previousData);
-		assignPreviousResultsToAVRReportData(data, testList[i]);
-			
+		Analysis analysis=analysisDAO.getPatientPreviousAnalysisForTestName(reportPatient, reportSample, testList[i].trim());
+			if(analysis!=null && !analysis.getStatusId().equals(StatusService.getInstance().getStatusID(AnalysisStatus.Canceled))){
+				String testName = TestService.getUserLocalizedTestName( analysis.getTest() );
+	
+				List<Result> resultList = resultDAO.getResultsByAnalysis(analysis);
+				String resultValue = null;
+	
+				boolean valid = ANALYSIS_FINALIZED_STATUS_ID.equals(analysis.getStatusId());
+			//	if(!valid){
+			//		atLeastOneAnalysisNotValidated = true;
+			//	}
+				// there may be more than one result for an analysis if one of
+				// them
+				// is a conclusion
+				if(resultList.size() > 1){
+					for(Result result : resultList){
+						if(result.getAnalyte() != null && result.getAnalyte().getId().equals(CONCLUSION_ID)){
+							Dictionary dictionary = new Dictionary();
+							dictionary.setId(result.getValue());
+							dictionaryDAO.getData(dictionary);
+							data.getPreviousResultMap().put("Vih", valid ? dictionary.getDictEntry() : invalidValue);//data.setVih(valid ? dictionary.getDictEntry() : invalidValue);
+							//data.setShowSerologie(Boolean.TRUE);
+						}else if(result.getAnalyte() != null && result.getAnalyte().getId().equals(CD4_CNT_CONCLUSION)){
+							//data.setCd4(valid ? result.getValue() : invalidValue);
+							data.getPreviousResultMap().put("Cd4",valid ? result.getValue() : invalidValue);
+						}else{
+							resultValue = result.getValue();
+						}
+					}
+				}
+	
+				if(resultList.size() > 0){
+					if(resultValue == null){
+						resultValue = resultList.get(resultList.size() - 1).getValue();
+					}
+				}
+	
+				if(resultValue != null || !valid){
+					assignPreviousResultsToAVRReportData(data, testName, valid ? resultValue : invalidValue);
+				}
+			}
+	
 			
 		}
-		/////////
-		reportSample=currentSample;
-		System.out.println("previousResultMap ="+data.getPreviousResultMap());
-		
+	
 	}
 
-	private void assignPreviousResultsToAVRReportData(ARVReportData data, String testName){
+	private void assignPreviousResultsToAVRReportData(ARVReportData data, String testName, String resultValue){
 	
-		if(testName.equals("Glycémie")){
-			data.getPreviousResultMap().put("Glycémie", previousData.getGlyc());
-		}else if(testName.equals("Créatininémie")){
-			data.getPreviousResultMap().put("Créatininémie", previousData.getCreatininemie());
-		}else if(testName.equals("Transaminases ALTL")){
-			data.getPreviousResultMap().put("Transaminases ALTL", previousData.getSgpt());
-		}else if(testName.equals("Transaminases ASTL")){
-			data.getPreviousResultMap().put("Transaminases ASTL", previousData.getSgot());
-		}else if(testName.equals("GB")){
-			data.getPreviousResultMap().put("GB", previousData.getGb());
-		}else if(testName.equals("GR")){
-			data.getPreviousResultMap().put("GR", previousData.getGr());
-		}else if(testName.equals("Hb")){
-			data.getPreviousResultMap().put("Hb", previousData.getHb());
-		}else if(testName.equals("HCT")){
-			data.getPreviousResultMap().put("HCT", previousData.getHct());
-		}else if(testName.equals("VGM")){
-			data.getPreviousResultMap().put("VGM", previousData.getVgm());
-		}else if(testName.equals("PLQ")){
-			data.getPreviousResultMap().put("PLQ", previousData.getPlq());
-		}else if(testName.equals("Neut %")){
-			data.getPreviousResultMap().put("Neut %", previousData.getNper());
-		}else if(testName.equals("Lymph %")){
-			data.getPreviousResultMap().put("Lymph %", previousData.getLper());
-		}else if(testName.equals("Mono %")){
-			data.getPreviousResultMap().put("Mono %", previousData.getMper());
-		}else if(testName.equals("Eo %")){
-			data.getPreviousResultMap().put("Eo %", previousData.getEoper());
-		}else if(testName.equals("Baso %")){
-			data.getPreviousResultMap().put("Baso %", previousData.getBper());
-		}else if(testName.equals("CD4 absolute count")){
-			data.getPreviousResultMap().put("CD4 absolute count", previousData.getCd4());
-		}else if(testName.equals("CD4 percentage count")){
-			data.getPreviousResultMap().put("CD4 percentage count", previousData.getCd4per());
-		}else if(testName.equals("TCMH")){
-			data.getPreviousResultMap().put("TCMH", previousData.getTcmh());
-		}else if(testName.equals("CCMH")){
-			data.getPreviousResultMap().put("CCMH", previousData.getCcmh());
-		}else if(testName.equals("DNA PCR")){
-			data.getPreviousResultMap().put("DNA PCR", previousData.getPcr());
-		}else if(testName.equals("Viral Load")){
-			data.getPreviousResultMap().put("Ampli2", previousData.getAmpli2());
-			data.getPreviousResultMap().put("Ampli2lo", previousData.getAmpli2lo());
-		}else if(testName.equals("Murex") || testName.equals("Intgral")){ //Serology must have one of these but not necessarily both
-			data.getPreviousResultMap().put("Vih", previousData.getVih());
+		if(testName.equalsIgnoreCase("Viral Load") || testName.equalsIgnoreCase("Charge Virale")){
+			data.setShowVirologie(Boolean.TRUE);
+			// Results entered via analyzer have log value, results entered
+			// manually may not
+			String baseValue = resultValue;
+			if(!GenericValidator.isBlankOrNull(resultValue) && resultValue.contains("(")){
+				String[] splitValue = resultValue.split("\\(");
+				data.getPreviousResultMap().put("Ampli2", splitValue[0]);//data.setAmpli2(splitValue[0]);
+				baseValue = splitValue[0];
+			}else{
+				data.getPreviousResultMap().put("Ampli2", resultValue);//data.setAmpli2(resultValue);
+			}
+			if(!GenericValidator.isBlankOrNull(baseValue) && !"0".equals(baseValue)){
+				try{
+					double viralLoad = Double.parseDouble(baseValue);
+					data.getPreviousResultMap().put("Ampli2lo", String.format("%.3g%n", Math.log10(viralLoad)));//data.setAmpli2lo(String.format("%.3g%n", Math.log10(viralLoad)));
+				}catch(NumberFormatException nfe){
+					data.getPreviousResultMap().put("Ampli2lo","");//data.setAmpli2lo("");
+				}
+			}
+	
+		}else if(testName.equals("Murex") || testName.equals("Intgral") || testName.equals("Integral")){ //Serology must have one of these but not necessarily both
+		//	data.setShowSerologie(Boolean.TRUE);
+		//	if(GenericValidator.isBlankOrNull(data.getVih())){
+			//	data.setVih(invalidValue);
+		//	}
+		}else {
+			data.getPreviousResultMap().put(testName, resultValue);
+			
 		}
 	}
 }
