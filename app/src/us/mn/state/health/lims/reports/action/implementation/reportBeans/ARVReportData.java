@@ -17,7 +17,9 @@
 package us.mn.state.health.lims.reports.action.implementation.reportBeans;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.validator.GenericValidator;
 
@@ -81,6 +83,8 @@ public class ARVReportData {
 	private String serologyQaEvent=null;
 	private String immunologyQaEvent=null;
 	private String hematologyQaEvent=null;
+	
+	private Map<String, String> previousResultMap = new HashMap<String, String>();
 
 	public String getGlyc() {
 		return glyc;
@@ -354,8 +358,14 @@ public class ARVReportData {
 	public String getAllQaEvents(){
 		return allQaEvents;
 	}
-	public void setAllQaEvents(String allQaEvents){
+	public void setAllQaEvents(String  allQaEvents){
 		this.allQaEvents=allQaEvents;
+	}
+	public Map<String, String>  getPreviousResultMap(){
+		return previousResultMap;
+	}
+	public void setPreviousResultMap(Map<String, String> previousResultMap){
+		this.previousResultMap=previousResultMap;
 	}
 	public void getSampleQaEventItems(Sample sample){
 		if(sample != null){

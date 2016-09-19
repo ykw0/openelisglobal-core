@@ -20,16 +20,23 @@ import org.apache.commons.validator.GenericValidator;
 import us.mn.state.health.lims.analysis.dao.AnalysisDAO;
 import us.mn.state.health.lims.analysis.daoimpl.AnalysisDAOImpl;
 import us.mn.state.health.lims.analysis.valueholder.Analysis;
+import us.mn.state.health.lims.common.services.StatusService.AnalysisStatus;
 import us.mn.state.health.lims.common.util.DateUtil;
 import us.mn.state.health.lims.dictionary.dao.DictionaryDAO;
 import us.mn.state.health.lims.dictionary.daoimpl.DictionaryDAOImpl;
 import us.mn.state.health.lims.dictionary.valueholder.Dictionary;
 import us.mn.state.health.lims.panel.valueholder.Panel;
+import us.mn.state.health.lims.patient.valueholder.Patient;
 import us.mn.state.health.lims.referencetables.daoimpl.ReferenceTablesDAOImpl;
 import us.mn.state.health.lims.result.dao.ResultDAO;
 import us.mn.state.health.lims.result.daoimpl.ResultDAOImpl;
 import us.mn.state.health.lims.result.valueholder.Result;
+import us.mn.state.health.lims.sample.valueholder.Sample;
+import us.mn.state.health.lims.samplehuman.dao.SampleHumanDAO;
+import us.mn.state.health.lims.samplehuman.daoimpl.SampleHumanDAOImpl;
 import us.mn.state.health.lims.sampleitem.valueholder.SampleItem;
+import us.mn.state.health.lims.test.dao.TestDAO;
+import us.mn.state.health.lims.test.daoimpl.TestDAOImpl;
 import us.mn.state.health.lims.test.valueholder.Test;
 import us.mn.state.health.lims.test.valueholder.TestSection;
 import us.mn.state.health.lims.typeofsample.dao.TypeOfSampleDAO;
@@ -215,7 +222,42 @@ public class AnalysisService{
         return analysis == null ? null : analysis.getTestSection();
     }
 
-    public static Analysis buildAnalysis(Test test, SampleItem sampleItem){
+    public Analysis getPatientPreviousAnalysisForTestName(Patient patient,Sample currentSample, String testName){
+		SampleHumanDAO sampleHumanDAO = new SampleHumanDAOImpl();
+		List<Sample> sampList=sampleHumanDAO.getSamplesForPatient(patient.getId());
+		Analysis previousAnalysis=null;
+		List<Integer> sampIDList= new ArrayList<Integer>();
+		List<Integer> testIDList= new ArrayList<Integer>();
+		
+		TestDAO testDAO=new TestDAOImpl();
+		testIDList.add(Integer.parseInt(testDAO.getTestByName(testName).getId()));
+		
+		if (sampList.isEmpty()) return previousAnalysis;
+		
+		for(Sample sample : sampList){
+			sampIDList.add(Integer.parseInt(sample.getId()));
+		}	
+		
+		List<Integer> statusList = new ArrayList<Integer>();
+		statusList.add(Integer.parseInt(StatusService.getInstance().getStatusID(AnalysisStatus.Finalized)));
+	
+		AnalysisDAO analysisDAO = new AnalysisDAOImpl();
+		List<Analysis> analysisList = analysisDAO.getAnalysesBySampleIdTestIdAndStatusId(sampIDList,testIDList, statusList);
+		
+		if (analysisList.isEmpty()) return previousAnalysis;
+		
+		for(int i=0;i<analysisList.size();i++){
+		  if(i<analysisList.size() && currentSample.getAccessionNumber().equals(analysisList.get(i).getSampleItem().getSample().getAccessionNumber())){
+			previousAnalysis=analysisList.get(i+1);
+			return previousAnalysis;
+		  }
+		
+		}
+		return previousAnalysis;
+		
+	}
+
+	public static Analysis buildAnalysis(Test test, SampleItem sampleItem){
 
             Analysis analysis = new Analysis();
             analysis.setTest(test);

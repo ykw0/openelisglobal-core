@@ -145,7 +145,9 @@ public interface AnalysisDAO extends BaseDAO {
 
      List<Analysis> getAnalysisBySampleAndTestIds(String sampleKey, List<Integer> testIds);
 
-	 List<Analysis> getAnalysisByTestSectionAndCompletedDateRange(String sectionID, Date lowDate, Date highDate) throws LIMSRuntimeException;
+     List<Analysis> getAnalysesBySampleIdTestIdAndStatusId(List<Integer> sampleIdList, List<Integer> testIdList, List<Integer> statusIdList);
+	 
+     List<Analysis> getAnalysisByTestSectionAndCompletedDateRange(String sectionID, Date lowDate, Date highDate) throws LIMSRuntimeException;
 
 	 List<Analysis> getAnalysisStartedOrCompletedInDateRange(Date lowDate, Date highDate) throws LIMSRuntimeException;
 

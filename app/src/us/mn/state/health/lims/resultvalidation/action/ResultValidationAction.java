@@ -47,7 +47,7 @@ public class ResultValidationAction extends BaseResultValidationAction {
 			throws Exception {
 
 		BaseActionForm dynaForm = (BaseActionForm) form;
-
+		
 		request.getSession().setAttribute(SAVE_DISABLED, "true");
 		String testSectionId = (request.getParameter("testSectionId"));
 

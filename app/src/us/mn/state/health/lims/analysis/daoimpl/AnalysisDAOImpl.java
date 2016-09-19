@@ -1432,4 +1432,29 @@ public class AnalysisDAOImpl extends BaseDAOImpl implements AnalysisDAO {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Analysis> getAnalysesBySampleIdTestIdAndStatusId(List<Integer> sampleIdList, List<Integer> testIdList, List<Integer> statusIdList) throws LIMSRuntimeException {
+	
+		if (sampleIdList.isEmpty() || testIdList.isEmpty() || statusIdList.isEmpty()) {
+			return new ArrayList<Analysis>();
+		}
+		String sql = "from Analysis a where a.sampleItem.sample.id in (:sampleIdList) and a.test.id in (:testIdList) and a.statusId in (:statusIdList) order by a.releasedDate desc";
+	
+		try {
+			Query query = HibernateUtil.getSession().createQuery(sql);
+			query.setParameterList("sampleIdList", sampleIdList);
+			query.setParameterList("testIdList", testIdList);
+			query.setParameterList("statusIdList", statusIdList);
+			List<Analysis> analysisList = query.list();
+			closeSession();
+			return analysisList;
+		} catch (HibernateException e) {
+			handleException(e, "getAnalysesBySampleIdTestIdAndStatusId");
+		}
+	
+		return null;
+	
+	}
+
 }
