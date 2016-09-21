@@ -1490,9 +1490,9 @@ public class AnalysisDAOImpl extends BaseDAOImpl implements AnalysisDAO {
 		if (analysisList.isEmpty()) return previousAnalysis;
 		
 		for(int i=0;i<analysisList.size();i++){
-		  if(i<analysisList.size() && currentSample.getAccessionNumber().equals(analysisList.get(i).getSampleItem().getSample().getAccessionNumber())){
+		  if(i<analysisList.size()-1 && currentSample.getAccessionNumber().equals(analysisList.get(i).getSampleItem().getSample().getAccessionNumber())){
 			previousAnalysis=analysisList.get(i+1);
-			//return previousAnalysis;
+			return previousAnalysis;
 		  }
 		
 		}

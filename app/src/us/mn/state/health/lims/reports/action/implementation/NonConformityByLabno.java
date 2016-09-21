@@ -103,14 +103,12 @@ public abstract class NonConformityByLabno extends Report implements IReportCrea
         lowerNumber = dynaForm.getString( "accessionDirect" );
         upperNumber = dynaForm.getString( "highAccessionDirect" );
         dateRange = new DateRange(lowDateStr, highDateStr);
-        
         createReportParameters();
         errorFound = !validateAccessionNumbers();
         if ( errorFound ) {
             return;
         }
         reportItems = new ArrayList<ARVReportData>();
-
         createReportItems();
         if ( this.reportItems.size() == 0 ) {
             add1LineErrorMessage("report.error.message.noPrintableItems");
@@ -152,10 +150,9 @@ public abstract class NonConformityByLabno extends Report implements IReportCrea
     		data.setOrgname(sampleOrg.getId() == null ? "" : sampleOrg.getOrganization().getOrganizationName());
 
     		data.setDoctor(getObservationValues(OBSERVATION_DOCTOR_ID));
-    		
-    		
+    				
     		data.getSampleQaEventItems(sample);
-    		reportItems.add(data);
+    		reportItems.add(data); 
          /*   for (SampleQaEvent sampleQaEvent : sampleQaEvents) {
             	QAService qa = new QAService( sampleQaEvent);
                 this.qaEvent = qa.getQAEvent();
@@ -185,6 +182,7 @@ public abstract class NonConformityByLabno extends Report implements IReportCrea
                 reportItems.add(data);
             }  */
         }
+      
     }
 
     /**

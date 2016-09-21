@@ -25,6 +25,7 @@ import us.mn.state.health.lims.common.services.QAService;
 import us.mn.state.health.lims.common.services.QAService.QAObservationType;
 import us.mn.state.health.lims.qaevent.valueholder.retroCI.QaEventItem;
 import us.mn.state.health.lims.sample.valueholder.Sample;
+import us.mn.state.health.lims.sampleitem.valueholder.SampleItem;
 import us.mn.state.health.lims.sampleqaevent.dao.SampleQaEventDAO;
 import us.mn.state.health.lims.sampleqaevent.daoimpl.SampleQaEventDAOImpl;
 import us.mn.state.health.lims.sampleqaevent.valueholder.SampleQaEvent;
@@ -54,6 +55,9 @@ public class EIDReportData {
 	
 	private List<SampleQaEvent> sampleQAEventList;
 	List<QaEventItem> qaEventItems;
+	
+	private String allQaEvents=null;
+	private String receptionQaEvent=null;
 	
 	private String virologyEidQaEvent=null;
 
@@ -185,24 +189,39 @@ public class EIDReportData {
 	public void setVirologyEidQaEvent(String virologyEidQaEvent) {
 		this.virologyEidQaEvent = virologyEidQaEvent;
 	}
-	/**
-	 * @param sample
-	 * @return
-	 */
+	public String getAllQaEvents(){
+		return allQaEvents;
+	}
+	public void setAllQaEvents(String  allQaEvents){
+		this.allQaEvents=allQaEvents;
+	}
+	public String getReceptionQaEvent() {
+		return receptionQaEvent;
+	}
+	public void setReceptionQaEvent(String receptionQaEvent) {
+		this.receptionQaEvent = receptionQaEvent;
+	}
 	public void getSampleQaEventItems(Sample sample){
 	    qaEventItems = new ArrayList<QaEventItem>();
 		if(sample != null){
 			getSampleQaEvents(sample);
 			for(SampleQaEvent event : sampleQAEventList){
 				QAService qa = new QAService(event);
-					
+				QaEventItem item = new QaEventItem();
+				item.setId(qa.getEventId());
+				item.setQaEvent(qa.getQAEvent().getId());
+				SampleItem sampleItem = qa.getSampleItem();
+                // -1 is the index for "all samples"
+				String sampleType=(sampleItem == null) ? "-1" : sampleItem.getTypeOfSample().getNameKey();
+				allQaEvents=allQaEvents==null?sampleType+":"+qa.getQAEvent().getNameKey():allQaEvents+";"+sampleType+":"+qa.getQAEvent().getNameKey();
+				
 				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.EID"))
 					virologyEidQaEvent=virologyEidQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyEidQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 	
 				
 			}
 		}
-		
+
 	}
 	public void getSampleQaEvents(Sample sample){
 		SampleQaEventDAO sampleQaEventDAO = new SampleQaEventDAOImpl();
