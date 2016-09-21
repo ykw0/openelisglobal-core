@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="189"/>
+	<property name="ireport.y" value="474"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -39,6 +39,7 @@
 	<field name="duplicateReport" class="java.lang.Boolean"/>
 	<field name="virologyEidQaEvent" class="java.lang.String"/>
 	<field name="allQaEvents" class="java.lang.String"/>
+	<field name="receptionQaEvent" class="java.lang.String"/>
 	<variable name="studyName" class="java.lang.String">
 		<initialValueExpression><![CDATA["Diagnostic des enfants par DBS-PCR"]]></initialValueExpression>
 	</variable>
@@ -202,9 +203,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="425" y="127" width="115" height="13">
-					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.coagulated"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.coagulated"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.coagulated"))]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.adult")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
@@ -221,9 +220,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="425" y="140" width="115" height="13">
-					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.insufficient"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.insufficient"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.insufficient"))]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.Date_1")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
@@ -240,9 +237,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="425" y="153" width="115" height="13">
-					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.hemolytic"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.hemolytic"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.hemolytic"))]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_3")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
@@ -258,11 +253,13 @@
 				<text><![CDATA[ Diamètre des spots < 5mm]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="425" y="166" width="115" height="13"/>
+				<reportElement x="425" y="166" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.Diametre")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="10"/>
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="179" width="551" height="13"/>
@@ -273,11 +270,13 @@
 				<text><![CDATA[ DBS spot de sang coagulé]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="425" y="179" width="115" height="13"/>
+				<reportElement x="425" y="179" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_C")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="192" width="551" height="13"/>
@@ -289,9 +288,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="425" y="192" width="115" height="13">
-					<printWhenExpression><![CDATA[($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.edtaTube:qa_event.mislabled"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Sang:qa_event.mislabled"))||
-($F{allQaEvents}!=null && $F{allQaEvents}.contains("sample.type.Plasma:qa_event.mislabled"))]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_I")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
@@ -307,11 +304,13 @@
 				<text><![CDATA[ Elution du disque DBS impossible]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="425" y="205" width="115" height="13"/>
+				<reportElement x="425" y="205" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_DI")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="218" width="551" height="13"/>
@@ -322,11 +321,13 @@
 				<text><![CDATA[ DBS spot de sang dilué par l’alcool]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="424" y="218" width="115" height="13"/>
+				<reportElement x="424" y="218" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_D")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="231" width="551" height="13"/>
@@ -337,11 +338,13 @@
 				<text><![CDATA[ Carte DBS sans enveloppe glassine (si plusieurs DBS dans un sachet Ziplock)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="425" y="232" width="114" height="13"/>
+				<reportElement x="425" y="232" width="114" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_E")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="244" width="551" height="13"/>
@@ -352,11 +355,13 @@
 				<text><![CDATA[ Carte DBS non conforme (différente du Whatman 903)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="424" y="244" width="115" height="13"/>
+				<reportElement x="424" y="244" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_NC")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="257" width="551" height="13"/>
@@ -367,11 +372,13 @@
 				<text><![CDATA[ DBS non identifié]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="424" y="257" width="115" height="13"/>
+				<reportElement x="424" y="257" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_NI")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="270" width="551" height="13"/>
@@ -382,11 +389,13 @@
 				<text><![CDATA[ DBS mal identifié (Identité discordante sur DBS et fiche)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="424" y="270" width="115" height="13"/>
+				<reportElement x="424" y="270" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_MI")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="283" width="551" height="13"/>
@@ -397,11 +406,13 @@
 				<text><![CDATA[ DBS sans fiche]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="424" y="283" width="115" height="13"/>
+				<reportElement x="424" y="283" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.DBS_SF")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="296" width="551" height="13"/>
@@ -412,11 +423,13 @@
 				<text><![CDATA[ Fiche de prélèvement entachée de sang]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="424" y="296" width="115" height="13"/>
+				<reportElement x="424" y="296" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.bloodstained.form")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="309" width="551" height="13"/>
@@ -427,11 +440,13 @@
 				<text><![CDATA[ Fiche de prélèvement sans échantillon DBS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="424" y="309" width="115" height="13"/>
+				<reportElement x="424" y="309" width="115" height="13">
+					<printWhenExpression><![CDATA[$F{allQaEvents}!=null && $F{allQaEvents}.contains("qa_event.Fiche_no_DBS")]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[XX]]></text>
+				<text><![CDATA[X]]></text>
 			</staticText>
 			<line>
 				<reportElement x="391" y="128" width="1" height="194"/>
@@ -541,7 +556,9 @@
 				<reportElement x="202" y="419" width="14" height="14"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="204" y="420" width="11" height="13"/>
+				<reportElement x="204" y="420" width="11" height="13">
+					<printWhenExpression><![CDATA[$F{virologyEidQaEvent}!=null]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[X]]></text>
 			</staticText>
@@ -614,6 +631,13 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="523" y="453" width="11" height="13"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="400" width="11" height="13">
+					<printWhenExpression><![CDATA[$F{receptionQaEvent}!=null]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[X]]></text>
 			</staticText>

@@ -202,7 +202,7 @@ public class ResultValidationSaveAction extends BaseResultValidationAction imple
 		}
 		
 		// route save back to RetroC specific ResultValidationRetroCAction
-		if (ConfigurationProperties.getInstance().isPropertyValueEqual(Property.configurationName, "CI RetroCI"))
+		if (ConfigurationProperties.getInstance().isPropertyValueEqual(Property.configurationName, "CI_GENERAL"))
 			forward = "successRetroC";
 
 		if( isBlankOrNull( testSectionName )){

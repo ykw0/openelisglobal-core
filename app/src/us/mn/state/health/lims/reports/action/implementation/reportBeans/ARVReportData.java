@@ -76,6 +76,7 @@ public class ARVReportData {
 	
 	private List<SampleQaEvent> sampleQAEventList;
 	private String allQaEvents=null;
+	private String receptionQaEvent=null;
 	private String biochemistryQaEvent=null;
 	private String virologyQaEvent=null;
 	private String virologyEidQaEvent=null;
@@ -309,6 +310,12 @@ public class ARVReportData {
 	public void setDuplicateReport(Boolean duplicateReport) {
 		this.duplicateReport = duplicateReport;
 	}
+	public String getReceptionQaEvent() {
+		return receptionQaEvent;
+	}
+	public void setReceptionQaEvent(String receptionQaEvent) {
+		this.receptionQaEvent = receptionQaEvent;
+	}
 	public String getBiochemistryQaEvent() {
 		return biochemistryQaEvent;
 	}
@@ -379,9 +386,12 @@ public class ARVReportData {
                 // -1 is the index for "all samples"
 				String sampleType=(sampleItem == null) ? "-1" : sampleItem.getTypeOfSample().getNameKey();
 				allQaEvents=allQaEvents==null?sampleType+":"+qa.getQAEvent().getNameKey():allQaEvents+";"+sampleType+":"+qa.getQAEvent().getNameKey();
+				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Reception"))
+					receptionQaEvent=receptionQaEvent==null ? qa.getQAEvent().getLocalizedName() : receptionQaEvent+" , "+qa.getQAEvent().getLocalizedName();
+				
 				if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Biochemistry"))
 					biochemistryQaEvent=biochemistryQaEvent==null ? qa.getQAEvent().getLocalizedName() : biochemistryQaEvent+" , "+qa.getQAEvent().getLocalizedName();
-				
+					
 				else if(!GenericValidator.isBlankOrNull(qa.getObservationValue( QAObservationType.SECTION )) && qa.getObservationValue( QAObservationType.SECTION ).equals("testSection.Virology"))
 					virologyQaEvent=virologyQaEvent==null ? qa.getQAEvent().getLocalizedName() : virologyQaEvent+" , "+qa.getQAEvent().getLocalizedName();
 
