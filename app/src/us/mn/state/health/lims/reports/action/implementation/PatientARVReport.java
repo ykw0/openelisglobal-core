@@ -272,7 +272,7 @@ public abstract class PatientARVReport extends RetroCIPatientReport{
 							//data.setShowSerologie(Boolean.TRUE);
 						}else if(result.getAnalyte() != null && result.getAnalyte().getId().equals(CD4_CNT_CONCLUSION)){
 							//data.setCd4(valid ? result.getValue() : invalidValue);
-							data.getPreviousResultMap().put("Cd4",valid ? result.getValue() : invalidValue);
+							data.getPreviousResultMap().put("CD4 absolute count",valid ? result.getValue() : invalidValue);
 						}else{
 							resultValue = result.getValue();
 						}
